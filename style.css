@@ -123,3 +123,7 @@ body {
 , #decimal:active, #clear:active {
     color: rgb(0, 0, 0, 0.1)
 }
+
+#add.active {
+    background-color: white; 
+}
