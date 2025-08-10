@@ -103,23 +103,38 @@ function createEquationPT2(arr) {
         let val1; 
         let val2; 
 
+        // The count of how many times "/" pops up in the equation array
+        let divisorCount = 0; 
+
+
         //The answer to return to the function
         let answer;
 
         for (let i = 0; i < equation.length; i++) {
             equation[i] = equation[i].replace(",", "");
             let equationArr = equation[i];
-
-            val1 = equationArr.charAt(1);
-            /*
-            if (equationArr.charAt(i) === "/") {
-                val1 = equationArr.slice(0, 2);
+            let divisor = equationArr.indexOf("/");
+            let equalSign = equationArr.indexOf("=");
+            
+            if (divisor = true) { 
+                divisorCount++; 
             }
-            */
+
+
+            if (divisor != -1) { 
+                val1 = equationArr.substring(0, divisor); 
+            }
+
+            if (equalSign != -1) { 
+                val2 = equationArr.substring(0, equalSign);
+            }
+
+
         }
 
         console.log(equation);
         console.log(val1);
+        console.log(val2);
     }
     
     function multiplication(equation) { 
