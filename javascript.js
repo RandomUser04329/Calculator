@@ -90,7 +90,6 @@ function createEquationPT2(arr) {
         }
 
     }
-
     /* Im getting this to be like an actual arithmetric process that starts with division then to multiplication then so on..
     Rather than just solving it all at once and getting the wrong calculation, it solves it a step by step process. 
     Now it also checks for a decimal and if there is a decimal within the equation, it turns it into a Float number. if not then its a regular integer.
@@ -99,18 +98,24 @@ function createEquationPT2(arr) {
     The way it solves the equations is first figuring out whats what in the array, so theres going to be a function that figures out the length of the number in the array then scans for 
     what operator is in front/back of it, then gets those two numbers and solves the math by which operator comes first in the arithmetric process. 
     */
-
     function division(equation) {   
+        //declares two values to mess with
         let val1; 
         let val2; 
 
+        //The answer to return to the function
+        let answer;
+
         for (let i = 0; i < equation.length; i++) {
             equation[i] = equation[i].replace(",", "");
+            let equationArr = equation[i];
 
-            if (equation[i] === operators[i]) { 
-                val1 = equation[i].slice(0, equation[i].indexOf("/"));
+            val1 = equationArr.charAt(1);
+            /*
+            if (equationArr.charAt(i) === "/") {
+                val1 = equationArr.slice(0, 2);
             }
-
+            */
         }
 
         console.log(equation);
@@ -145,14 +150,6 @@ function createEquationPT2(arr) {
 
 
 }
-
-
-
-
-
-
-
-
 
 
 //BACKSPACE OR CLEARALL
@@ -236,7 +233,6 @@ decimal.addEventListener("click", function() {
     backSpace.textContent = "C";
     createEquation(".");
 });
-
 
 //Operator buttons
 divide.addEventListener("click", function() {
