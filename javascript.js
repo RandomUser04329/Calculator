@@ -1,5 +1,5 @@
 //Input Field 
-const numField = document.querySelector("#numField");
+let numField = document.querySelector("#numField");
 
 //Add, Subtract, Multiply, Divide, Decimal buttons
 const divide = document.querySelector("#divide");
@@ -26,83 +26,132 @@ const zero = document.querySelector("#zero");
 //Equal sign button 
 const equal = document.querySelector("#equals");
 
-let wholeEquation = []; 
-
 //CREATES THE EQUATION
 function createEquation(int) {
 
     let decimalCount = 0;
-    let inputValue = numField.value; 
     let numbers = 0;
-    let fixedString = "";
+    let wholeEquation = []; 
 
-    for (let i = 0; i < numField.value.length; i++) {
-        //ESTABLISHES A LENGTH FOR THE NUMBERS AND IS REFERENCED FROM THE NUMBER FIELD 
-        numbers.length = 0; 
-        numbers = inputValue;
+    numField.value += int;
+    numbers = numField.value;
 
-        //CHECKS OPERATORS AND SPLITS THE NUMBERS FROM EACHOTHER WITH THE OPERATORS IN AN ARRAY, WHICH THEN GETS MADE INTO A STRING
-        if (int === "+" || int === "-" || int === "*" || int === "/"|| int === "=") {
-            wholeEquation.push(numbers);
-            numField.value = "";
-            for (let i = 0; i < wholeEquation.length; i++) {
-                fixedString += wholeEquation[i];
-                if (fixedString.includes("=")) {
-                    return solveEquation(fixedString);
-                }
-            }
-        } 
+    let index = 0;
 
-
-        //GETS DECIMAL COUNT
-        if (int === ".") {
-            decimalCount++; 
-        }
+    if (int === ".") {
+        decimalCount++; 
     }
 
-    //ALERTS THE USER THAT THEY CANT HAVE NO MORE THAN 1 DECIMAL AND DELETES THE DECIMAL THEY JUST ENTERED
-    if (decimalCount >= 2) {
+    if (decimalCount > 1) {
         alert("Error, Can't have no more than 1 Decimal");
     }  
 
-    console.log(fixedString);
+    for (let i = 0; i < numField.value.length; i++) {
+
+        if (int === "+" || int === "-" || int === "*" || int === "/" || int === "=") {
+            wholeEquation[index] = numbers.slice(0, -1);
+            index++; 
+            wholeEquation[index] = int;
+            numField.value = "";
+            return createEquationPT2(wholeEquation); 
+        } 
+
+    }
 } 
 
-//SOLVES THE EQUATION 
-function solveEquation(str) { 
+//SOLVES THE EQUATION
+let finalEquation = [];
+let index = 0; 
+function createEquationPT2(arr) { 
+
+    //Turns the given array into a string then is processed back into one array
+    //in the loop below
+    let str = "" + arr;
     let answer = 0;
 
-    for (let i = 0; i < str.length; i++) {
-        if (str.includes("/")) {
+    if (str.length !== 0) { 
+        finalEquation[index] = str; 
+        index++; 
+    }
 
-        } else if (str.includes("*")) {
+    
+     const operators = ["+", "-", "*", "/"];
 
-        } else if (str.includes("-")) {
+    for (let i = 0; i < finalEquation.length; i++) { 
 
-        } else if(str.includes("+")) {
-
-        }  
+        if (finalEquation[i].includes("/")) {
+            division(finalEquation);
+        } else if (finalEquation[i].includes("*")) { 
+            multiplication(finalEquation);
+        } else if (finalEquation[i].includes("-")) { 
+            subtraction(finalEquation);
+        } else if (finalEquation[i].includes("+")) { 
+            addition(finalEquation);
+        }
 
     }
 
+    /* Im getting this to be like an actual arithmetric process that starts with division then to multiplication then so on..
+    Rather than just solving it all at once and getting the wrong calculation, it solves it a step by step process. 
+    Now it also checks for a decimal and if there is a decimal within the equation, it turns it into a Float number. if not then its a regular integer.
+    
 
-    function divide() {
+    The way it solves the equations is first figuring out whats what in the array, so theres going to be a function that figures out the length of the number in the array then scans for 
+    what operator is in front/back of it, then gets those two numbers and solves the math by which operator comes first in the arithmetric process. 
+    */
 
+    function division(equation) {   
+        let val1; 
+        let val2; 
+
+        for (let i = 0; i < equation.length; i++) {
+            equation[i] = equation[i].replace(",", "");
+
+            if (equation[i] === operators[i]) { 
+                val1 = equation[i].slice(0, equation[i].indexOf("/"));
+            }
+
+        }
+
+        console.log(equation);
+        console.log(val1);
+    }
+    
+    function multiplication(equation) { 
+
+        for (let i = 0; i < equation.length; i++) {
+            equation[i] = equation[i].replace(",", "");
+
+        }
+        console.log(equation);
     }
 
-    function multiply() {
-        
-    }
+    function subtraction(equation) { 
 
-    function subtract() {
-        
-    }
+        for (let i = 0; i < equation.length; i++) {
+            equation[i] = equation[i].replace(",", "");
+        }
+        console.log(equation);
+    }   
 
-    function add() {
-        
+    function addition(equation) { 
+
+        for (let i = 0; i < equation.length; i++) {
+            equation[i] = equation[i].replace(",", "");
+        }
+        console.log(equation);
     }
+    
+
 
 }
+
+
+
+
+
+
+
 
 
 
@@ -121,61 +170,61 @@ function backSpaceHandler() {
 
 //Number buttons
 nine.addEventListener("click", function() {
-    numField.value += 9;
+    //numField.value += 9;
     backSpace.textContent = "C";
     createEquation(9);
 });
 
 eight.addEventListener("click", function() {
-    numField.value += 8;
+    //numField.value += 8;
     backSpace.textContent = "C";
     createEquation(8);
 });
 
 seven.addEventListener("click", function() {
-    numField.value += 7;
+    //numField.value += 7;
     backSpace.textContent = "C";
     createEquation(7);
 });
 
 six.addEventListener("click", function() {
-    numField.value += 6;
+    //numField.value += 6;
     backSpace.textContent = "C";
     createEquation(6);
 });
 
 five.addEventListener("click", function() {
-    numField.value += 5;
+    //numField.value += 5;
     backSpace.textContent = "C";
     createEquation(5);
 });
 
 four.addEventListener("click", function() {
-    numField.value += 4;
+    //numField.value += 4;
     backSpace.textContent = "C";
     createEquation(4);
 });
 
 three.addEventListener("click", function() {
-    numField.value += 3;
+    //numField.value += 3;
     backSpace.textContent = "C";
     createEquation(3);
 });
 
 two.addEventListener("click", function() {
-    numField.value += 2;
+    //numField.value += 2;
     backSpace.textContent = "C";
     createEquation(2);
 });
 
 one.addEventListener("click", function() {
-    numField.value += 1;
+    //numField.value += 1;
     backSpace.textContent = "C";
     createEquation(1);
 });
 
 zero.addEventListener("click", function() {
-    numField.value += 0;
+    //numField.value += 0;
     backSpace.textContent = "C";
     createEquation(0);
 });
@@ -183,7 +232,7 @@ zero.addEventListener("click", function() {
 
 //Decimal button
 decimal.addEventListener("click", function() {
-    numField.value += ".";
+    //numField.value += ".";
     backSpace.textContent = "C";
     createEquation(".");
 });
@@ -191,22 +240,22 @@ decimal.addEventListener("click", function() {
 
 //Operator buttons
 divide.addEventListener("click", function() {
-    numField.value += "/";
+    //numField.value += "/";
     createEquation("/");
 });
 
 multiply.addEventListener("click", function() {
-    numField.value += "*";
+    //numField.value += "*";
     createEquation("*");
 });
 
 subtract.addEventListener("click", function() {
-    numField.value += "-";
+    //numField.value += "-";
     createEquation("-");
 });
 
 add.addEventListener("click", function() {
-    numField.value += "+";
+    //numField.value += "+";
     createEquation("+");
 });
 
@@ -222,6 +271,6 @@ backSpace.addEventListener("click", function() {
 
 //Equals sign button
 equal.addEventListener("click", function() {
-    numField.value += "=";
+    //numField.value += "=";
     createEquation("=");
 });
