@@ -74,11 +74,7 @@ function createEquationPT2(arr) {
         index++; 
     }
 
-    
-     const operators = ["+", "-", "*", "/"];
-
     for (let i = 0; i < finalEquation.length; i++) { 
-
         if (finalEquation[i].includes("/")) {
             division(finalEquation);
         } else if (finalEquation[i].includes("*")) { 
@@ -88,8 +84,8 @@ function createEquationPT2(arr) {
         } else if (finalEquation[i].includes("+")) { 
             addition(finalEquation);
         }
-
     }
+
     /* Im getting this to be like an actual arithmetric process that starts with division then to multiplication then so on..
     Rather than just solving it all at once and getting the wrong calculation, it solves it a step by step process. 
     Now it also checks for a decimal and if there is a decimal within the equation, it turns it into a Float number. if not then its a regular integer.
@@ -99,16 +95,12 @@ function createEquationPT2(arr) {
     what operator is in front/back of it, then gets those two numbers and solves the math by which operator comes first in the arithmetric process. 
     */
     function division(equation) {   
-        //declares two values to mess with
+        //declares two values to mess with        
         let val1; 
         let val2; 
 
         // The count of how many times "/" pops up in the equation array
         let divisorCount = 0; 
-
-
-        //The answer to return to the function
-        let answer;
 
         for (let i = 0; i < equation.length; i++) {
             equation[i] = equation[i].replace(",", "");
@@ -116,51 +108,141 @@ function createEquationPT2(arr) {
             let divisor = equationArr.indexOf("/");
             let equalSign = equationArr.indexOf("=");
             
-            if (divisor = true) { 
+            if (equationArr.includes("/")) { 
                 divisorCount++; 
             }
 
-
             if (divisor != -1) { 
-                val1 = equationArr.substring(0, divisor); 
+                val1 = equationArr.substring(0, divisor);
+                
             }
 
             if (equalSign != -1) { 
                 val2 = equationArr.substring(0, equalSign);
             }
 
+            answer = parseInt(val1) / parseInt(val2); 
+        }
+
+        
+        
+        console.log(equation);
+        console.log(val1);
+        console.log(val2);
+        console.log(divisorCount);
+        console.log(answer);
+        
+    }
+    
+    function multiplication(equation) { 
+        let val1; 
+        let val2; 
+
+        // The count of how many times "*" pops up in the equation array
+        let multplyCount = 0;
+
+        for (let i = 0; i < equation.length; i++) {
+            equation[i] = equation[i].replace(",", "");
+            let equationArr= equation[i];
+            let multiplier = equationArr.indexOf("*");
+            let equalSign = equationArr.indexOf("=");
+            
+            if (equationArr.includes("*"))  { 
+                multplyCount++;
+            }
+
+            if (multiplier != -1) {
+                val1 = equationArr.substring(0, multiplier);
+            }
+
+            if (equalSign != -1) { 
+                val2 = equationArr.substring(0, equalSign);
+            }
+
+            answer = parseInt(val1) * parseInt(val2);
+        }
+        
+        console.log(equation);
+        console.log(val1);
+        console.log(val2);
+        console.log(answer);
+        
+    }
+
+    function subtraction(equation) { 
+        let val1;
+        let val2;
+
+        let subtractCount = 0; 
+
+        for (let i = 0; i < equation.length; i++) {
+            equation[i] = equation[i].replace(",", ""); 
+            let equationArr = equation[i]; 
+            let subtractor = equationArr.indexOf("-");
+            let equalSign = equationArr.indexOf("=");
+
+            if (equationArr.includes("-")) {
+                subtractCount++;
+            }
+
+            if (subtractor != -1) { 
+                val1 = equationArr.substring(0, subtractor);
+            }
+
+            if (equalSign != -1) {
+                val2 = equationArr.substring(0, equalSign);
+            }
+
+            answer = parseInt(val1) - parseInt(val2);
 
         }
 
         console.log(equation);
         console.log(val1);
         console.log(val2);
-    }
-    
-    function multiplication(equation) { 
-
-        for (let i = 0; i < equation.length; i++) {
-            equation[i] = equation[i].replace(",", "");
-
-        }
-        console.log(equation);
-    }
-
-    function subtraction(equation) { 
-
-        for (let i = 0; i < equation.length; i++) {
-            equation[i] = equation[i].replace(",", "");
-        }
-        console.log(equation);
+        console.log(answer);
+       
     }   
 
     function addition(equation) { 
+        let val1;
+        let val2;
+
+        let addCount = 0;
 
         for (let i = 0; i < equation.length; i++) {
             equation[i] = equation[i].replace(",", "");
+            let equationArr = equation[i];
+            let adding = equationArr.indexOf("+");
+            let equalSign = equationArr.indexOf("=");
+
+            if (equationArr.includes("+")) { 
+                addCount++;
+            }
+
+            if (adding != -1) {
+                val1 = equationArr.substring(0, adding);
+            }
+
+            if (equalSign != -1) {
+                val2 = equationArr.substring(0, equalSign);
+            }
+
+            answer = parseInt(val1) + parseInt(val2);
+
+
+
         }
+        
+        
+
         console.log(equation);
+        console.log(val1);
+        console.log(val2);
+        console.log(answer);
+        
     }
+    
     
 
 
