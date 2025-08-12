@@ -67,7 +67,8 @@ function createEquationPT2(arr) {
     //Turns the given array into a string then is processed back into one array
     //in the loop below
     let str = "" + arr;
-    let answer = 0;
+
+    let finalAnswer = 0; 
 
     if (str.length !== 0) { 
         finalEquation[index] = str; 
@@ -96,8 +97,9 @@ function createEquationPT2(arr) {
     */
     function division(equation) {   
         //declares two values to mess with        
-        let val1; 
-        let val2; 
+        let val1 = 0;
+        let val2 = 0;
+        let answer = 0; 
 
         // The count of how many times "/" pops up in the equation array
         let divisorCount = 0; 
@@ -121,17 +123,23 @@ function createEquationPT2(arr) {
                 val2 = equationArr.substring(0, equalSign);
             }
 
-            answer = parseInt(val1) / parseInt(val2); 
+            answer = val1 / val2;
+
+            if (answer % 1 !== 0) {
+                answer = answer.toFixed(2); 
+            }
+            
+            
         }
 
-        
-        
+
         console.log(equation);
         console.log(val1);
         console.log(val2);
         console.log(divisorCount);
         console.log(answer);
         
+
     }
     
     function multiplication(equation) { 
@@ -159,7 +167,7 @@ function createEquationPT2(arr) {
                 val2 = equationArr.substring(0, equalSign);
             }
 
-            answer = parseInt(val1) * parseInt(val2);
+            answer = parseInt(val1) * parseFloat(val2);
         }
         
         console.log(equation);
@@ -193,7 +201,7 @@ function createEquationPT2(arr) {
                 val2 = equationArr.substring(0, equalSign);
             }
 
-            answer = parseInt(val1) - parseInt(val2);
+            answer = val1 - val2;
 
         }
 
