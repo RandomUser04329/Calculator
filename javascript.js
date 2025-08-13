@@ -29,7 +29,6 @@ const equal = document.querySelector("#equals");
 //CREATES THE EQUATION
 let wholeEquation = [];
 let wholeIndex = 0;
-let index = 0;
 function createEquation(int) {
     let numbers = 0;
     let equation = []; 
@@ -37,7 +36,7 @@ function createEquation(int) {
     numField.value += int;
     numbers = numField.value;
 
-    //let index = 0;
+    let index = 0;
 
     for (let i = 0; i < numField.value.length; i++) {
 
@@ -46,8 +45,7 @@ function createEquation(int) {
             index++; 
             equation[index] = int;
             numField.value = "";
-            //return createEquationPT2(equation); 
-            //return storeEquation(equation)
+            return storeEquation(equation)
         } 
     }
 
@@ -62,227 +60,66 @@ function createEquation(int) {
             wholeIndex++;
         }
 
-       // console.log(wholeEquation);
+        let wholeEquationStr = "";
+
+        for (let i = 0; i < wholeEquation.length; i++) { 
+            wholeEquation[i] = wholeEquation[i].replace(",", "");
+            wholeEquationStr += wholeEquation[i];
+
+            if (wholeEquationStr.includes("=")) { 
+                return solveEquation(wholeEquationStr)
+            }
+        }
     }
 } 
 
 
-/*
-//SOLVES THE EQUATION
-let finalEquation = [];
-let index = 0; 
 
+function solveEquation(equationStr) { 
 
-function createEquationPT2(arr) { 
+    let divisor;
+    let multiplier;
+    let subtractor; 
+    let adding;
 
-    //Turns the given array into a string then is processed back into one array
-    //in the loop below
-    let str = "" + arr;
-    let answer = 0;
+    for (let i = 0; i < equationStr.length; i++) { 
+        divisor = equationStr.indexOf("/");
+        multiplier = equationStr.indexOf("*");
+        subtractor = equationStr.indexOf("-");
+        adding = equationStr.indexOf("+");
 
-    //The final Answer from all the combined steps 
-    let finalAnswer = 0; 
-
-    if (str.length !== 0) { 
-        finalEquation[index] = str; 
-        index++; 
-    }
-  
-    let equalSign;
-    let finalEquationArr;
-
-    for (let i = 0; i < finalEquation.length; i++) { 
-        finalEquation[i] = finalEquation[i].replace(",", "");
-        finalEquationArr = finalEquation[i];
-        equalSign = finalEquationArr.indexOf("=");
-
-        
-        if (finalEquationArr.includes("/")) {
-            division(finalEquation);
-        } else if (finalEquationArr.includes("*")) { 
-            multiplication(finalEquation);
-        } else if (finalEquationArr.includes("-")) { 
-            subtraction(finalEquation);
-        } else if (finalEquationArr.includes("+")) { 
-            addition(finalEquation);
+        if (equationStr.includes("/")) { 
+            divide(equationStr);
+        } else if (equationStr.includes("*")) { 
+            multiply(equationStr);
+        } else if (equationStr.includes("-")) { 
+            subtraction(equationStr);
+        } else if (equationStr.includes("+")) { 
+            addition(equationStr);
         }
-        
     }
 
-    console.log(finalEquation);
-
-    
-   
-   
-    function division(equation) {   
-        //declares two values to mess with        
-        let val1 = 0;
-        let val2 = 0;
-        answer = 0; 
-
-        // The count of how many times "/" pops up in the equation array
-        let divisorCount = 0; 
-
-        for (let i = 0; i < equation.length; i++) {
-            let equationArr = equation[i];
-            let divisor = equationArr.indexOf("/");
-            let equalSign = equationArr.indexOf("=");
-            
-            if (equationArr.includes("/")) { 
-                divisorCount++; 
-            }
-
-            if (divisor != -1) { 
-                val1 = equationArr.substring(0, divisor);
-                
-            }
-
-            if (equalSign != -1) { 
-                val2 = equationArr.substring(0, equalSign);
-            }
-
-            answer = val1 / val2;
-
-            if (answer % 1 !== 0) {
-                answer = answer.toFixed(2); 
-            }
-            
-        }
-
-        return answer;
+    function divide(equation) { 
 
     }
 
-    
-    function multiplication(equation) { 
-        let val1 = 0; 
-        let val2 = 0; 
-        answer = 0;
+    function multiply(equation) { 
 
-        // The count of how many times "*" pops up in the equation array
-        let multplyCount = 0;
-
-        for (let i = 0; i < equation.length; i++) {
-            equation[i] = equation[i].replace(",", "");
-            let equationArr= equation[i];
-            let multiplier = equationArr.indexOf("*");
-            let equalSign = equationArr.indexOf("=");
-            
-            if (equationArr.includes("*"))  { 
-                multplyCount++;
-            }
-
-            if (multiplier != -1) {
-                val1 = equationArr.substring(0, multiplier);
-            }
-
-            if (equalSign != -1) { 
-                val2 = equationArr.substring(0, equalSign);
-            }
-
-            answer = val1 * val2;
-
-            if (answer % 1 !== 0) {
-                answer = answer.toFixed(2); 
-            }
-        }
-
-        console.log(equation);
-        console.log(val1);
-        console.log(val2);
-
-        
-        return answer;
     }
 
     function subtraction(equation) { 
-        let val1 = 0;
-        let val2 = 0;
-        answer = 0;
 
-        let subtractCount = 0; 
-
-        for (let i = 0; i < equation.length; i++) {
-            equation[i] = equation[i].replace(",", ""); 
-            let equationArr = equation[i]; 
-            let subtractor = equationArr.indexOf("-");
-            let equalSign = equationArr.indexOf("=");
-
-            if (equationArr.includes("-")) {
-                subtractCount++;
-            }
-
-            if (subtractor != -1) { 
-                val1 = equationArr.substring(0, subtractor);
-            }
-
-            if (equalSign != -1) {
-                val2 = equationArr.substring(0, equalSign);
-            }
-
-            answer = val1 - val2;
-
-            if (answer % 1 !== 0) {
-                answer = answer.toFixed(2);
-            }
-
-        }
-
-        console.log(equation);
-        console.log(val1);
-        console.log(val2);
-        console.log(answer);
-
-        return answer;
-       
-    }   
+    }
 
     function addition(equation) { 
-        let val1 = 0;
-        let val2 = 0;
-        answer = 0; 
-
-        let addCount = 0;
-
-        for (let i = 0; i < equation.length; i++) {
-            equation[i] = equation[i].replace(",", "");
-            let equationArr = equation[i];
-            let adding = equationArr.indexOf("+");
-            let equalSign = equationArr.indexOf("=");
-
-            if (equationArr.includes("+")) { 
-                addCount++;
-            }
-
-            if (adding != -1) {
-                val1 = equationArr.substring(0, adding);
-            }
-
-            if (equalSign != -1) {
-                val2 = equationArr.substring(0, equalSign);
-            }
-
-            answer = val1 + val2;
-
-            if (answer % 1 !== 0) { 
-                answer = answer.toFixed(2);
-            }
-
-        }
         
-        console.log(equation);
-        console.log(val1);
-        console.log(val2);
-        console.log(answer);  
-
-        return answer; 
     }
-    
 
-    console.log(answer);
-    
+    console.log(equationStr);
+
 }
-*/
+
+
 
 //BACKSPACE OR CLEARALL
 function backSpaceHandler() {
