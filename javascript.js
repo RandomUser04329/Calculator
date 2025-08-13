@@ -49,8 +49,6 @@ function createEquation(int) {
         } 
     }
 
-    console.log(equation);
-
     function storeEquation(equationArr) { 
         
         let equationStr = "" + equationArr;
@@ -83,39 +81,19 @@ function solveEquation(equationStr) {
     let adding;
 
     for (let i = 0; i < equationStr.length; i++) { 
-        divisor = equationStr.indexOf("/");
-        multiplier = equationStr.indexOf("*");
+        let a;
+        let b; 
+
+        divisor = equationStr.split("/");
+        multiplier = equationStr.split("*");
         subtractor = equationStr.indexOf("-");
         adding = equationStr.indexOf("+");
 
-        if (equationStr.includes("/")) { 
-            divide(equationStr);
-        } else if (equationStr.includes("*")) { 
-            multiply(equationStr);
-        } else if (equationStr.includes("-")) { 
-            subtraction(equationStr);
-        } else if (equationStr.includes("+")) { 
-            addition(equationStr);
-        }
-    }
 
-    function divide(equation) { 
-
-    }
-
-    function multiply(equation) { 
-
-    }
-
-    function subtraction(equation) { 
-
-    }
-
-    function addition(equation) { 
+        console.log(divisor)
         
+    
     }
-
-    console.log(equationStr);
 
 }
 
