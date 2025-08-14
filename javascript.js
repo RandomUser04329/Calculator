@@ -26,74 +26,30 @@ const zero = document.querySelector("#zero");
 //Equal sign button 
 const equal = document.querySelector("#equals");
 
-//CREATES THE EQUATION
-let wholeEquation = [];
-let wholeIndex = 0;
-function createEquation(int) {
-    let numbers = 0;
-    let equation = []; 
+function equation(input) { 
 
-    numField.value += int;
-    numbers = numField.value;
+    let equationArr = [];
+    numField.value += input;
 
     let index = 0;
+    equationArr.push(numField.value);
 
-    for (let i = 0; i < numField.value.length; i++) {
-
-        if (int === "+" || int === "-" || int === "*" || int === "/" || int === "=") {
-            equation[index] = numbers.slice(0, -1);
-            index++; 
-            equation[index] = int;
-            numField.value = "";
-            return storeEquation(equation)
-        } 
+    if (input === "/") { 
+        index++;
+        equationArr[index] = input;
+        numField.value = '';    
     }
 
-    function storeEquation(equationArr) { 
-        
-        let equationStr = "" + equationArr;
+    /*
+    FOR LATER: get the input into the first index of the array, then if an operator is detected, 
+    it stores that operator in a second index, then goes to the third index and starts on the next value
+    Once the user enters another operator or the equal sign, it solves the current array values and if the user
+    had chose an operator, it stores the answer into the first index and does the same thing over again. If the 
+    user hit the equals sign, it shows the answer to the numField field and clears the array for the next operation. 
+    */
 
-        if (equationStr.length !== 0) { 
-            wholeEquation[wholeIndex] = equationStr; 
-            wholeIndex++;
-        }
-
-        let wholeEquationStr = "";
-
-        for (let i = 0; i < wholeEquation.length; i++) { 
-            wholeEquation[i] = wholeEquation[i].replace(",", "");
-            wholeEquationStr += wholeEquation[i];
-
-            if (wholeEquationStr.includes("=")) { 
-                return solveEquation(wholeEquationStr)
-            }
-        }
-    }
-} 
-
-
-
-function solveEquation(equationStr) { 
-
-    let divisor;
-    let multiplier;
-    let subtractor; 
-    let adding;
-
-    for (let i = 0; i < equationStr.length; i++) { 
-        let a;
-        let b; 
-
-        divisor = equationStr.split("/");
-        multiplier = equationStr.split("*");
-        subtractor = equationStr.indexOf("-");
-        adding = equationStr.indexOf("+");
-
-
-        console.log(divisor)
-        
-    
-    }
+ 
+    console.log(equationArr);
 
 }
 
@@ -114,92 +70,77 @@ function backSpaceHandler() {
 
 //Number buttons
 nine.addEventListener("click", function() {
-    //numField.value += 9;
     backSpace.textContent = "C";
-    createEquation(9);
+    equation(9);
 });
 
 eight.addEventListener("click", function() {
-    //numField.value += 8;
     backSpace.textContent = "C";
-    createEquation(8);
+    equation(8);
 });
 
 seven.addEventListener("click", function() {
-    //numField.value += 7;
     backSpace.textContent = "C";
-    createEquation(7);
+    equation(7);
 });
 
 six.addEventListener("click", function() {
-    //numField.value += 6;
     backSpace.textContent = "C";
-    createEquation(6);
+    equation(6);
 });
 
 five.addEventListener("click", function() {
-    //numField.value += 5;
     backSpace.textContent = "C";
-    createEquation(5);
+    equation(5);
 });
 
 four.addEventListener("click", function() {
-    //numField.value += 4;
     backSpace.textContent = "C";
-    createEquation(4);
+    equation(4);
 });
 
 three.addEventListener("click", function() {
-    //numField.value += 3;
     backSpace.textContent = "C";
-    createEquation(3);
+    equation(3);
 });
 
 two.addEventListener("click", function() {
-    //numField.value += 2;
     backSpace.textContent = "C";
-    createEquation(2);
+    equation(2);
 });
 
 one.addEventListener("click", function() {
-    //numField.value += 1;
     backSpace.textContent = "C";
-    createEquation(1);
+    equation(1);
 });
 
 zero.addEventListener("click", function() {
-    //numField.value += 0;
     backSpace.textContent = "C";
-    createEquation(0);
+    equation(0);
 });
 
 
 //Decimal button
 decimal.addEventListener("click", function() {
-    //numField.value += ".";
     backSpace.textContent = "C";
-    createEquation(".");
+    equation(".");
 });
 
 //Operator buttons
 divide.addEventListener("click", function() {
-    //numField.value += "/";
-    createEquation("/");
+    equation("/");
 });
 
 multiply.addEventListener("click", function() {
-    //numField.value += "*";
-    createEquation("*");
-});
+    equation("*");
+}, { once : true });
 
 subtract.addEventListener("click", function() {
-    //numField.value += "-";
-    createEquation("-");
+    equation("-");
 });
 
 add.addEventListener("click", function() {
-    //numField.value += "+";
-    createEquation("+");
+    equation("+");
 });
 
 //Backspace button
@@ -214,6 +155,5 @@ backSpace.addEventListener("click", function() {
 
 //Equals sign button
 equal.addEventListener("click", function() {
-    //numField.value += "=";
-    createEquation("=");
+    equation("=");
 });
