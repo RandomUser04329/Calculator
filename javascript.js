@@ -29,16 +29,25 @@ const equal = document.querySelector("#equals");
 function equation(input) { 
 
     let equationArr = [];
+    let index = 0;
+    let a;
     numField.value += input;
 
-    let index = 0;
-    equationArr.push(numField.value);
-
+    equationArr = [numField.value];
+    
     if (input === "/") { 
-        index++;
-        equationArr[index] = input;
-        numField.value = '';    
-    }
+        a = equationArr.slice(0, -1);
+        equationArr.push(input);
+        numField.value = "";
+    }   
+
+   
+
+ 
+    console.log(equationArr);
+    console.log(a);
+
+}
 
     /*
     FOR LATER: get the input into the first index of the array, then if an operator is detected, 
@@ -47,11 +56,6 @@ function equation(input) {
     had chose an operator, it stores the answer into the first index and does the same thing over again. If the 
     user hit the equals sign, it shows the answer to the numField field and clears the array for the next operation. 
     */
-
- 
-    console.log(equationArr);
-
-}
 
 
 
