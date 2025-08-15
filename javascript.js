@@ -26,28 +26,43 @@ const zero = document.querySelector("#zero");
 //Equal sign button 
 const equal = document.querySelector("#equals");
 
+let equationArr = [];
+let currentNum = "";
+const operators = ["/", "*", "-", "+"];
+
 function equation(input) { 
 
-    let equationArr = [];
-    let index = 0;
-    let a;
-    numField.value += input;
+   if (operators.includes(input)) { 
+        if (currentNum !== "") { 
+            equationArr.push(currentNum);
+            currentNum = "";
+        }
 
-    equationArr = [numField.value];
-    
-    if (input === "/") { 
-        a = equationArr.slice(0, -1);
-        equationArr.push(input);
-        numField.value = "";
-    }   
+    equationArr.push(input);
 
+        if (equationArr.length >= 3) { 
+            let value1;
+            let value2;
+            let operator;
+            let sum; 
+            for (let i = 0; i < equationArr.length; i++) {
+                if (equationArr[i] === "/" || equationArr[i] === "*") {  
+                    operator = equationArr[i];
+                  
+                }
+            }
+            console.log(operator);
+            console.log(value1);
+        }
+   } else { 
+        currentNum += input;
+   }
+   numField.value = currentNum;
    
-
- 
-    console.log(equationArr);
-    console.log(a);
+   console.log(equationArr);
 
 }
+
 
     /*
     FOR LATER: get the input into the first index of the array, then if an operator is detected, 
@@ -75,52 +90,52 @@ function backSpaceHandler() {
 //Number buttons
 nine.addEventListener("click", function() {
     backSpace.textContent = "C";
-    equation(9);
+    equation("9");
 });
 
 eight.addEventListener("click", function() {
     backSpace.textContent = "C";
-    equation(8);
+    equation("8");
 });
 
 seven.addEventListener("click", function() {
     backSpace.textContent = "C";
-    equation(7);
+    equation("7");
 });
 
 six.addEventListener("click", function() {
     backSpace.textContent = "C";
-    equation(6);
+    equation("6");
 });
 
 five.addEventListener("click", function() {
     backSpace.textContent = "C";
-    equation(5);
+    equation("5");
 });
 
 four.addEventListener("click", function() {
     backSpace.textContent = "C";
-    equation(4);
+    equation("4");
 });
 
 three.addEventListener("click", function() {
     backSpace.textContent = "C";
-    equation(3);
+    equation("3");
 });
 
 two.addEventListener("click", function() {
     backSpace.textContent = "C";
-    equation(2);
+    equation("2");
 });
 
 one.addEventListener("click", function() {
     backSpace.textContent = "C";
-    equation(1);
+    equation("1");
 });
 
 zero.addEventListener("click", function() {
     backSpace.textContent = "C";
-    equation(0);
+    equation("0");
 });
 
 
@@ -137,7 +152,7 @@ divide.addEventListener("click", function() {
 
 multiply.addEventListener("click", function() {
     equation("*");
-}, { once : true });
+});
 
 subtract.addEventListener("click", function() {
     equation("-");
