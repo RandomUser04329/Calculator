@@ -40,20 +40,27 @@ function equation(input) {
 
     equationArr.push(input);
 
-        if (equationArr.length >= 3) { 
-            let value1;
-            let value2;
-            let operator;
+        if (!equationArr.includes("=")) { //THIS IS RIGHT !!
+            let val1;
+            let val2;
             let sum; 
-            for (let i = 0; i < equationArr.length; i++) {
-                if (equationArr[i] === "/" || equationArr[i] === "*") {  
-                    operator = equationArr[i];
-                  
+            for (let i = 0; i < 3; i++) {
+                val1 = equationArr[0];  
+                val2 = equationArr[2];
+                if (equationArr[1] === "/") { 
+                    sum = val1 / val2
+                    equationArr[0] = sum;
+                } else if (equationArr[1] === "*") { 
+                    sum = val1 * val2;
                 }
             }
-            console.log(operator);
-            console.log(value1);
+
+        
+            console.log(sum);
+            //console.log(val1);
+            //console.log(val2);
         }
+        
    } else { 
         currentNum += input;
    }
