@@ -29,6 +29,7 @@ const equal = document.querySelector("#equals");
 let equationArr = [];
 let currentNum = "";
 const operators = ["/", "*", "-", "+"];
+const equalSign = "=";
 
 function equation(input) { 
 
@@ -40,25 +41,35 @@ function equation(input) {
 
     equationArr.push(input);
 
-        if (!equationArr.includes("=")) { //THIS IS RIGHT !!
+        
+        if (!input.includes("=")) { //FINALLLYLYYYYYY GOT ITTT
             let val1;
             let val2;
             let sum; 
-            for (let i = 0; i < 3; i++) {
+           for (let i = 0; i < equationArr.length; i++) {
                 val1 = equationArr[0];  
                 val2 = equationArr[2];
-                if (equationArr[1] === "/") { 
-                    sum = val1 / val2
-                    equationArr[0] = sum;
-                } else if (equationArr[1] === "*") { 
-                    sum = val1 * val2;
-                }
-            }
+                if (equationArr.length > 3) { 
+                    if (equationArr[1] === "/") { 
+                        sum = Number(val1) / Number(val2);
+                    } 
+                    if (equationArr[1] === "*") { 
+                        sum = Number(val1) * Number(val2);
+                    } 
+                    if (equationArr[1] === "-") { 
+                        sum = Number(val1) - Number(val2);
+                    } 
+                    if (equationArr[1] === "+") { 
+                        sum = Number(val1) + Number(val2);
+                    }
 
-        
-            console.log(sum);
-            //console.log(val1);
-            //console.log(val2);
+                    sum = sum.toFixed(2);
+
+                    equationArr.splice(0, 3, sum); //Got it!!
+                }
+
+            }
+            //console.log(sum);
         }
         
    } else { 
