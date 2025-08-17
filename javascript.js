@@ -29,11 +29,11 @@ const equal = document.querySelector("#equals");
 let equationArr = [];
 let currentNum = "";
 const operators = ["/", "*", "-", "+"];
-const equalSign = "=";
 
 function equation(input) { 
-
+    //If one of the buttons contains an operator string, it clears the field but inserts in an array
    if (operators.includes(input)) { 
+
         if (currentNum !== "") { 
             equationArr.push(currentNum);
             currentNum = "";
@@ -41,7 +41,10 @@ function equation(input) {
 
     equationArr.push(input);
 
-        
+        /*If the user doesnt put a equals sign yet, it sums up the first 
+        three elements in the array so that it shows the current answer to the user 
+        but will allow them to continue their equation*/
+
         if (!input.includes("=")) { //FINALLLYLYYYYYY GOT ITTT
             let val1;
             let val2;
@@ -65,30 +68,55 @@ function equation(input) {
 
                     sum = sum.toFixed(2);
 
-                    equationArr.splice(0, 3, sum); //Got it!!
-                }
+                    equationArr.splice(0, 3, sum); 
 
-            }
-            //console.log(sum);
+                    return numField.value = sum;
+                }
+           }
+        } 
+        //If "=", it sums up the array and clears it but stores it into a variable and shows the user the final sum
+   } else if (input.includes("=")) { 
+        if (currentNum !== "") { 
+            equationArr.push(currentNum);
         }
-        
-   } else { 
+
+        let val1;
+        let val2;
+        let finalSum;
+        for (let i = 0; i < equationArr.length; i++) { 
+            val1 = equationArr[0];
+            val2 = equationArr[2];
+
+            if (equationArr[1] === "/") { 
+                finalSum = Number(val1) / Number(val2);      
+            } else if (equationArr[1] === "*") { 
+                finalSum = Number(val1) * Number(val2);      
+            } else if (equationArr[1] === "-") { 
+                finalSum = Number(val1) - Number(val2);      
+            } else if (equationArr[1] === "+") { 
+                finalSum = Number(val1) + Number(val2);      
+            }
+
+            finalSum = finalSum.toFixed(2);
+
+            equationArr = [];
+            currentNum = "";
+        }
+
+        return numField.value = finalSum;
+
+    } else { 
+
+        // takes the values and concates them into a string
         currentNum += input;
-   }
+    }
+    // which is then concated to the input field value
    numField.value = currentNum;
    
-   console.log(equationArr);
+   //console.log(equationArr);
 
 }
 
-
-    /*
-    FOR LATER: get the input into the first index of the array, then if an operator is detected, 
-    it stores that operator in a second index, then goes to the third index and starts on the next value
-    Once the user enters another operator or the equal sign, it solves the current array values and if the user
-    had chose an operator, it stores the answer into the first index and does the same thing over again. If the 
-    user hit the equals sign, it shows the answer to the numField field and clears the array for the next operation. 
-    */
 
 
 
