@@ -65,8 +65,10 @@ function equation(input) {
                     if (equationArr[1] === "+") { 
                         sum = Number(val1) + Number(val2);
                     }
-
-                    sum = sum.toFixed(2);
+                    
+                    if (sum % 1 !== 0) { 
+                        sum = sum.toFixed(2);
+                    }
 
                     equationArr.splice(0, 3, sum); 
 
@@ -97,7 +99,9 @@ function equation(input) {
                 finalSum = Number(val1) + Number(val2);      
             }
 
-            finalSum = finalSum.toFixed(2);
+            if (finalSum % 1 !== 0) { 
+                finalSum = finalSum.toFixed(2);
+            }
 
             equationArr = [];
             currentNum = "";
@@ -106,7 +110,6 @@ function equation(input) {
         return numField.value = finalSum;
 
     } else { 
-
         // takes the values and concates them into a string
         currentNum += input;
     }
