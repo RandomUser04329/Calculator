@@ -31,12 +31,16 @@ let currentNum = "";
 const operators = ["/", "*", "-", "+"];
 
 function equation(input) { 
+
+    //Changes the clear button text content
+    backSpace.textContent = "C";
     //If one of the buttons contains an operator string, it clears the field but inserts in an array
    if (operators.includes(input)) { 
 
         if (currentNum !== "") { 
             equationArr.push(currentNum);
             currentNum = "";
+            console.log(equationArr);
         }
 
     equationArr.push(input);
@@ -85,6 +89,7 @@ function equation(input) {
         let val1;
         let val2;
         let finalSum;
+        
         for (let i = 0; i < equationArr.length; i++) { 
             val1 = equationArr[0];
             val2 = equationArr[2];
@@ -125,72 +130,53 @@ function equation(input) {
 
 //BACKSPACE OR CLEARALL
 function backSpaceHandler() {
-    let curValue = numField.value; 
-
-    if (curValue.length > 0) { 
-        numField.value = curValue.substring(0, curValue.length - 1);
-    }
-
-    if (numField.value.trim() === "") {
-        backSpace.textContent = "AC"
-    }
+    
 }
 
 //Number buttons
 nine.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation("9");
 });
 
 eight.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation("8");
 });
 
 seven.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation("7");
 });
 
 six.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation("6");
 });
 
 five.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation("5");
 });
 
 four.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation("4");
 });
 
 three.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation("3");
 });
 
 two.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation("2");
 });
 
 one.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation("1");
 });
 
 zero.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation("0");
 });
 
 
 //Decimal button
 decimal.addEventListener("click", function() {
-    backSpace.textContent = "C";
     equation(".");
 });
 
@@ -213,13 +199,12 @@ add.addEventListener("click", function() {
 
 //Backspace button
 backSpace.addEventListener("click", function() {
-    if (backSpace.textContent === "AC") {
-        backSpace.addEventListener("click", function() {
-            wholeEquation = []; 
-        });
-    }
-    backSpaceHandler();
+   
 });
+
+if (equationArr.length <= 0) { 
+    backSpace.textContent = "AC"
+} 
 
 //Equals sign button
 equal.addEventListener("click", function() {
