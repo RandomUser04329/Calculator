@@ -34,6 +34,12 @@ function equation(input) {
 
     //Changes the clear button text content
     backSpace.textContent = "C";
+
+    if (numField.value === "") { 
+        backSpace.textContent = "AC";
+    }
+
+
     //If one of the buttons contains an operator string, it clears the field but inserts in an array
    if (operators.includes(input)) { 
 
@@ -120,18 +126,21 @@ function equation(input) {
     }
     // which is then concated to the input field value
    numField.value = currentNum;
-   
+
    //console.log(equationArr);
 
 }
 
 
-
-
 //BACKSPACE OR CLEARALL
+
 function backSpaceHandler() {
     
+    if (currentNum.length > 0) {
+        return numField.value = currentNum.substring(0, currentNum.length - 1);
+    }   
 }
+
 
 //Number buttons
 nine.addEventListener("click", function() {
@@ -198,13 +207,8 @@ add.addEventListener("click", function() {
 });
 
 //Backspace button
-backSpace.addEventListener("click", function() {
-   
-});
+backSpace.addEventListener("click", backSpaceHandler); 
 
-if (equationArr.length <= 0) { 
-    backSpace.textContent = "AC"
-} 
 
 //Equals sign button
 equal.addEventListener("click", function() {
