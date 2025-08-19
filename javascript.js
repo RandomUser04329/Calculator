@@ -57,13 +57,13 @@ function equation(input) {
 
                 //ERROR Check
                 if (operators.includes(val1)) {
-                    console.log("Entered an operator with no value previously, Restarting.")
+                    alert("Entered an operator with no value previously, Restarting.")
                     equationArr = [];
                     numField.value = "";
                     return;
                 }
                 if (operators.includes(val2)) {
-                    console.log("Entered an operator with no value previously, Restarting.")
+                    alert("Entered an operator with no value previously, Restarting.")
                     equationArr = [];
                     numField.value = "";
                     return;
